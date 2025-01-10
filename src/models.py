@@ -18,19 +18,19 @@ class User(Base):
 
     followed_users = relationship(
         "User", 
-        secondary="follower",  # Usa la tabla intermedia 'follower'
-        primaryjoin="User.id==follower.c.user_id",  # Relación de un usuario hacia los que sigue
-        secondaryjoin="User.id==follower.c.follower_id",  # Relación de los seguidores hacia un usuario
-        back_populates="followers"  # Relación inversa con la clase User (a través de 'followers')
+        secondary="follower",  
+        primaryjoin="User.id==follower.c.user_id",  
+        secondaryjoin="User.id==follower.c.follower_id",  
+        back_populates="followers"
     )
 
     # Relación de un usuario con los usuarios que lo siguen
     followers = relationship(
         "User", 
-        secondary="follower",  # Usa la tabla intermedia 'follower'
-        primaryjoin="User.id==follower.c.follower_id",  # Relación de los seguidores hacia un usuario
-        secondaryjoin="User.id==follower.c.user_id",  # Relación de un usuario hacia los que sigue
-        back_populates="followed_users"  # Relación inversa con la clase User (a través de 'followed_users')
+        secondary="follower", 
+        primaryjoin="User.id==follower.c.follower_id",  
+        secondaryjoin="User.id==follower.c.user_id",  
+        back_populates="followed_users"  
     )
 
 class Post(Base):
@@ -62,14 +62,14 @@ class Follower(Base):
 
 class Person(Base):
     __tablename__ = 'person'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
+    
+    
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
 class Address(Base):
     __tablename__ = 'address'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
+    
+    
     id = Column(Integer, primary_key=True)
     street_name = Column(String(250))
     street_number = Column(String(250))
@@ -80,7 +80,7 @@ class Address(Base):
     def to_dict(self):
         return {}
 
-## Draw from SQLAlchemy base
+
 try:
     result = render_er(Base, 'diagram.png')
     print("Success! Check the diagram.png file")
