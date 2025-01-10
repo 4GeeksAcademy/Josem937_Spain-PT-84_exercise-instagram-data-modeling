@@ -24,7 +24,7 @@ class User(Base):
         back_populates="followers"
     )
 
-    # Relación de un usuario con los usuarios que lo siguen
+    
     followers = relationship(
         "User", 
         secondary="follower", 
